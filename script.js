@@ -1,4 +1,4 @@
- const hourHand = document.querySelector('.hour-hand');
+const hourHand = document.querySelector('.hour-hand');
     const minuteHand = document.querySelector('.min-hand');
     const secondHand = document.querySelector('.second-hand');
 
@@ -6,6 +6,10 @@
     hourHand.style.transform = 'rotate(0deg)';
     minuteHand.style.transform = 'rotate(0deg)';
     secondHand.style.transform = 'rotate(0deg)';
+
+    function degreesToRadians(degrees) {
+      return (degrees * Math.PI) / 180;
+    }
 
     function updateClock() {
       const now = new Date();
