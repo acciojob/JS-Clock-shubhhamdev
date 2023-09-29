@@ -74,5 +74,26 @@
 </style>
 
 <script src="./script.js"></script>
+	<script>
+  describe('Clock Test', () => {
+    it('Should have the minute hand with a close transformation matrix', () => {
+      cy.get('.min-hand').should('have.css', 'transform').then((transform) => {
+        // Define the expected matrix values
+        const expectedMatrix = [0.309017, 0.951057, -0.951057, 0.309017, 0, 0];
+
+        // Extract the actual matrix values from the CSS 'transform' property
+        const actualMatrix = transform.match(/matrix\(([^)]+)\)/)[1].split(', ').map(Number);
+
+        // Define a tolerance level for comparison
+        const tolerance = 0.01; // Adjust the tolerance as needed
+
+        // Check that each element of the actual matrix is within the tolerance of the expected matrix
+        for (let i = 0; i < actualMatrix.length; i++) {
+          expect(actualMatrix[i]).to.be.closeTo(expectedMatrix[i], tolerance);
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
