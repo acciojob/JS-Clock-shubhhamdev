@@ -1,37 +1,30 @@
+//your code here
+const secondHand = document.querySelector('.second-hand');
+const minsHand = document.querySelector('.min-hand');
 const hourHand = document.querySelector('.hour-hand');
-    const minuteHand = document.querySelector('.min-hand');
-    const secondHand = document.querySelector('.second-hand');
 
-    // Set the initial rotation of the hands
-    hourHand.style.transform = 'rotate(0deg)';
-    minuteHand.style.transform = 'rotate(0deg)';
-    secondHand.style.transform = 'rotate(0deg)';
+function setDate() {
+    const now = new Date();
+    
 
-    function degreesToRadians(degrees) {
-      return (degrees * Math.PI) / 180;
-    }
+    const seconds = now.getSeconds();
+    const mins = now.getMinutes();
+    const hour = now.getHours();
 
-    function updateClock() {
-      const now = new Date();
+    console.log("curr", now, seconds, mins, hour)
 
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
+    const hourDegrees = (30*hour + mins/2);
+    const minsDegrees = 6*mins;
+    const secondsDegrees = 6*seconds;
 
-      // Calculate the rotation of the hour hand
-      const hourRotation = (hours % 12) * 360 / 12 + (minutes / 60) * 360 / 12 + 90;
 
-      // Calculate the rotation of the minute hand
-      const minuteRotation = (minutes * 360 / 60) + (seconds / 60) * 360 / 60 + 90;
+    console.log('degres', hourDegrees, minsDegrees, secondsDegrees)
+    
+    secondHand.style.transform = `rotate(${secondsDegrees }deg)`;
+    minsHand.style.transform = `rotate(${minsDegrees + 90}deg)`;
+    hourHand.style.transform = `rotate(${hourDegrees +90 }deg)`;
 
-      // Calculate the rotation of the second hand
-      const secondRotation = (seconds * 360 / 60) + 90;
+	// hourHand.style.transform = `rotate(${Math.round(hourDegrees) + 90}deg)`;
+}
 
-      // Set the rotation of the hands
-      hourHand.style.transform = `rotate(${hourRotation}deg)`;
-      minuteHand.style.transform = `rotate(${minuteRotation}deg)`;
-      secondHand.style.transform = `rotate(${secondRotation}deg)`;
-    }
-
-    // Update the clock every second
-    setInterval(updateClock, 1000);
+setInterval(setDate, 1000);
